@@ -15,19 +15,15 @@ clr.AddReference("RevitServices")
 import RevitServices
 from RevitServices.Transactions import TransactionManager
 from Autodesk.Revit.UI import *
-from pyrevit import forms
 doc = __revit__.ActiveUIDocument.Document
 
-
-
-#Result Window
+"""Define Result Window"""
 def window(numberoftags):
     dialog = TaskDialog("Header")
     dialog.MainInstruction = "Results"
     dialog.MainContent = "{0} tags were switched to {1}".format(numberoftags,'halftone')
     dialog.CommonButtons = TaskDialogCommonButtons.Close;
     return dialog.Show()
-
 
 """Create Tag Class"""
 class Tag:
@@ -50,8 +46,7 @@ class Tag:
     def ID(self):
         return self.tag.Id 
 
-
-"""Collect Duct, Pipe, and Equipment Tags"""
+"""Collect Duct, Pipe, and Mechanical Equipment Tags"""
 duct_tag = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_DuctTags).WhereElementIsNotElementType().ToElements()
 pipe_tag = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_PipeTags).WhereElementIsNotElementType().ToElements()
 equipment_tag = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_MechanicalEquipmentTags).WhereElementIsNotElementType().ToElements()
@@ -59,7 +54,7 @@ equipment_tag = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Mec
 #Join tags into one list
 all_tags = [Tag(i) for i in duct_tag] + [Tag(i) for i in pipe_tag] + [Tag(i) for i in equipment_tag]
 
-# Filter to tags referencing existing elements
+# Filter tags to ones referencing existing elements
 ex_tags = [i for i in all_tags if i.phase]
 
 #Create Graphic Settings for Halftone Tags
