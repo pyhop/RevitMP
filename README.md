@@ -1,2 +1,2 @@
 # RevitMP
-Python scripts for Revit
+Python Revit scripts for mechanical and plumbing BIM modelers
