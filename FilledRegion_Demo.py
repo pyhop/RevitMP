@@ -56,12 +56,12 @@ elements = [i for i in all_elements_in_View]
 """Enter Desired Filled Region Name"""
 Filled_Region_Name = 'Diagonal Down - Transparent'
 
-f_region_types = FilteredElementCollector(doc).OfClass(FilledRegionType)
+filled_region_types = FilteredElementCollector(doc).OfClass(FilledRegionType)
 filled = []
 filled_Id = [] 
-for fregion_type in f_region_types:
-    if Element.Name.GetValue(fregion_type) == Filled_Region_Name:
-        fill = fregion_type 
+for f in filled_region_types:
+    if Element.Name.GetValue(f) == Filled_Region_Name:
+        fill = f 
     else: 
         pass
 """Enter Size Factor to Extend Around Element"""
