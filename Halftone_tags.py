@@ -7,13 +7,8 @@ existing phased elements
 __title__ = 'Halftone\nTags' 
 __author__= 'marentette'
 ##Import Libraries 
-import clr
-clr.AddReference("RevitAPI")
 import Autodesk
 from Autodesk.Revit.DB import *
-clr.AddReference("RevitServices")
-import RevitServices
-from RevitServices.Transactions import TransactionManager
 from Autodesk.Revit.UI import *
 doc = __revit__.ActiveUIDocument.Document
 
