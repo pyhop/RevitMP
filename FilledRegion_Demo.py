@@ -40,13 +40,12 @@ class BB_Box:
         start = [pt1,pt2,pt3,pt4]
         end = [pt2,pt3,pt4,pt1]
         """Create Curveloop"""
-        lines = CurveLoop() 
-        lines2 = [] 
+        lines = [] 
         for i,j in zip(start,end):
             L = Line.CreateBound(i,j)
             if L:
-                lines2.append(L)
-        curveloop = CurveLoop.Create(lines2)
+                lines.append(L)
+        curveloop = CurveLoop.Create(lines)
         """Create Filled Region"""
         outRegion  = FilledRegion.Create(doc, fill.Id, self.view.Id, [curveloop])
 
@@ -57,8 +56,6 @@ elements = [i for i in all_elements_in_View]
 Filled_Region_Name = 'Diagonal Down - Transparent'
 
 filled_region_types = FilteredElementCollector(doc).OfClass(FilledRegionType)
-filled = []
-filled_Id = [] 
 for f in filled_region_types:
     if Element.Name.GetValue(f) == Filled_Region_Name:
         fill = f 
