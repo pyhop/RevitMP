@@ -49,8 +49,7 @@ class BB_Box:
         """Create Filled Region"""
         outRegion  = FilledRegion.Create(doc, fill.Id, self.view.Id, [curveloop])
 
-all_elements_in_View = FilteredElementCollector(doc,view.Id).ToElements() 
-elements = [i for i in all_elements_in_View]
+elements = FilteredElementCollector(doc,view.Id).ToElements() 
 
 """Enter Desired Filled Region Name"""
 Filled_Region_Name = 'Diagonal Down - Transparent'
