@@ -2,8 +2,11 @@
 """
 __title__ = 'Demo\nFilled Region' 
 __author__= 'marentette'
-import Autodesk
-from Autodesk.Revit.DB import *
+
+from Autodesk.Revit.DB import \
+FilledRegionType, Element,\
+FilteredElementCollector, BuiltInParameter,\
+XYZ, Line, CurveLoop,FilledRegion
 
 from june import revit_transaction 
 
