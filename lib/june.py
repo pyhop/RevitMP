@@ -1,8 +1,7 @@
 from functools import wraps
 from Autodesk.Revit.Exceptions import InvalidOperationException
-import Autodesk
-import System
-from Autodesk.Revit.DB import *
+from Autodesk.Revit.DB import Transaction
+
 doc = __revit__.ActiveUIDocument.Document
 
 """Decorator Curtosity of Gui Talarico"""
@@ -23,4 +22,3 @@ def revit_transaction(transaction_name):
             return return_value
         return wrapped_f
     return wrap
-
