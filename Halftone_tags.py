@@ -5,9 +5,12 @@ Halftone tags referencing exsiting phased elements
 __title__ = 'Halftone\nTags' 
 __author__= 'marentette'
 
-import Autodesk
-from Autodesk.Revit.DB import *
-from Autodesk.Revit.UI import *
+from Autodesk.Revit.DB import \
+Element,BuiltInCategory,\
+FilteredElementCollector, BuiltInParameter,\
+OverrideGraphicSettings
+
+from Autodesk.Revit.UI import TaskDialog, TaskDialogCommonButtons
 
 from june import revit_transaction 
 #Active document 
