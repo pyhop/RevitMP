@@ -1,6 +1,7 @@
 """Print sheet names to CSV file 
 or sheet number and name in one string to
-CSV file saved on users desktop.
+CSV file saved on users desktop. Sheets 
+are sorted by sheet number.
 """
 __title__ = 'Sheet Names\nto CSV' 
 __author__= 'marentette'
