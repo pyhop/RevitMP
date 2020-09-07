@@ -24,7 +24,7 @@ def window():
     dialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink2, 'Sheet Name Only', '')
     return dialog.Show()
 
-"""Collect Sheet Names and Number and Sort By Sheet Number"""
+"""Collect Sheet Names and Numbers and Sort By Sheet Number"""
 collect_sheets = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Sheets)
 #Filter out placeholder sheets
 sheets = [i for i in collect_sheets if not any([i.SheetNumber.Contains('Right')])] 
