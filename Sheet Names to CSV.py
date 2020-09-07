@@ -1,5 +1,6 @@
-"""Print Sheet Names to CSV file
-Sheet Names are Sorted by Sheet Number
+"""Print sheet names to CSV file 
+or sheet number and name in one string to
+CSV file saved on users desktop.
 """
 __title__ = 'Sheet Names\nto CSV' 
 __author__= 'marentette'
@@ -13,7 +14,6 @@ TaskDialog,TaskDialogCommandLinkId
 import os
 import csv 
 doc = __revit__.ActiveUIDocument.Document
-
 
 #User Options
 def window():
@@ -36,7 +36,6 @@ user_input = str(window())
 """Create Strings"""
 name=[]
 if user_input == 'CommandLink1':
-    
     for nam, num in zip(sheet_names,sheet_numbers):
         S = '{0}-{1}'.format(num,nam)
         if S: 
