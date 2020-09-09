@@ -13,6 +13,15 @@ from june import revit_transaction
 doc = __revit__.ActiveUIDocument.Document
 view = doc.ActiveView
 
+@revit_transaction('Demo Filled Region')
+def create_filledRegion(elements,factor,fill):
+    for e in elements: 
+        Box = BB_Box(e,view)
+        if Box.phase:
+            Box.filled_Region(factor,fill)
+        else:
+            pass
+
 class BB_Box:
     def __init__(self,element,view):
         self.element = element 
@@ -27,7 +36,6 @@ class BB_Box:
             demo = False 
         return demo  
     
-    @revit_transaction('Demo Filled Region')
     def filled_Region(self,factor,fill):
         BB= self.element.get_BoundingBox(self.view)
         """Expand Boundry Box by Factor"""
@@ -66,9 +74,4 @@ for f in filled_region_types:
 """Enter Size Factor to Extend Around Element"""
 factor = 0.5    
 
-for e in elements: 
-    Box = BB_Box(e,view)
-    if Box.phase:
-        Box.filled_Region(factor,fill)
-    else:
-        pass
+create_filledRegion(elements,factor,fill)
