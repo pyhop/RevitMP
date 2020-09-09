@@ -14,7 +14,7 @@ doc = __revit__.ActiveUIDocument.Document
 view = doc.ActiveView
 
 @revit_transaction('Demo Filled Region')
-def create_filledRegion(elements,factor,fill):
+def create_Filled_Region(elements,factor,fill):
     for e in elements: 
         Box = BB_Box(e,view)
         if Box.phase:
@@ -74,4 +74,4 @@ for f in filled_region_types:
 """Enter Size Factor to Extend Around Element"""
 factor = 0.5    
 
-create_filledRegion(elements,factor,fill)
+create_Filled_Region(elements,factor,fill)
