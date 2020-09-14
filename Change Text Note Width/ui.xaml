@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	Title="Change Text Notes Width"
+	ShowInTaskbar="False"
+	Topmost="True"
+	WindowStartupLocation="CenterScreen"
+	ScrollViewer.VerticalScrollBarVisibility="Disabled"
+	HorizontalContentAlignment="Center"
+	Background="#FFFFFDFC"
+	Width="651.5"
+	Height="163.3">
+	<StackPanel
+		Margin="10,26,10,0"
+		VerticalAlignment="Top"
+		Height="93"
+		Width="483">
+		<DockPanel
+			VerticalAlignment="Center"
+			Margin="10">
+			<Label
+				DockPanel.Dock="Left"
+				FontWeight="Bold"
+				Background="White"
+				Content="Multiplier"
+				Width="65" />
+			<TextBox
+				Text="{Binding Value, ElementName=Multiplier, UpdateSourceTrigger=PropertyChanged}"
+				DockPanel.Dock="Right"
+				TextAlignment="Right"
+				Height="28"
+				Width="33" />
+			<Slider
+				x:Name="Multiplier"
+				Maximum="7"
+				Minimum="0"
+				TickPlacement="BottomRight"
+				TickFrequency="0.001"
+				Value="0.75"
+				IsSnapToTickEnabled="True"
+				Height="25"
+				Width="291" />
+		</DockPanel>
+		<Button
+			Click="Set_text"
+			Content="Change Text Width"
+			Width="317"
+			Height="25"
+			Background="#FF9FE7F9" />
+	</StackPanel>
+</Window>
