@@ -41,13 +41,11 @@ def reload_CAD(CAD_Links):
 linkInstances = FilteredElementCollector(doc).OfClass(RevitLinkInstance).ToElements()
 ALLCADTypesInDocument = FilteredElementCollector(doc).OfClass(ImportInstance).ToElements()
 
-"""Format For Dictionaries"""
+"""Create Dictionaries"""
 revit_name = [i.Name.split(" : ")[0]+" " for i in linkInstances]
 CAD_name = [i.Category.Name for i in ALLCADTypesInDocument]
 link_Revit = [i for i in linkInstances] 
 link_CAD = [i for i in ALLCADTypesInDocument]  
-
-"""Create Dictionaries"""
 Revit_dict = dict(zip(revit_name,link_Revit))
 CAD_dict = dict(zip(CAD_name,link_CAD))
 
