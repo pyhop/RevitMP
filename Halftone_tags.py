@@ -14,20 +14,20 @@ from Autodesk.Revit.UI import TaskDialog, TaskDialogCommonButtons
 
 from june import revit_transaction 
 
-#Active document 
 doc = __revit__.ActiveUIDocument.Document
 
-#Result Window
 def window(numberoftags):
+    """Result Window"""
     dialog = TaskDialog("Header")
     dialog.MainInstruction = "Results"
     dialog.MainContent = "{0} tags were switched to {1}".format(numberoftags,'halftone')
     dialog.CommonButtons = TaskDialogCommonButtons.Close;
     return dialog.Show()
 
-#Halftone function 
+
 @revit_transaction('Halftone Existing Tags')
 def halftone(tags): 
+    """Halftone Tag Function"""
     graphic_halftone = OverrideGraphicSettings().SetHalftone(True)
     count = 0
     for t in tags:
