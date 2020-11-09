@@ -7,16 +7,19 @@ __author__= 'marentette'
 
 from Autodesk.Revit.DB import FilteredElementCollector,BuiltInCategory,Transaction 
 
+from june import revit_transaction 
+
+@revit_transaction("Match Insulation Phase to Duct")
+def set_insulation (ducts,insulation):
+    for d,i in zip(ducts,insulation):
+        i.CreatedPhaseId  = d.CreatedPhaseId
+    
 doc = __revit__.ActiveUIDocument.Document
 
 insulation = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_DuctInsulations).WhereElementIsNotElementType().ToElements() 
 
 ducts = [doc.GetElement(x.HostElementId) for x in insulation]
   
-t = Transaction(doc, "Match Insulation Phase to Duct")
-t.Start()
-for d,i in zip(ducts,insulation):
-    i.CreatedPhaseId  = d.CreatedPhaseId
-t.Commit()  
-
+if __name__ == '__main__':
+    set_insulation(ducts,insulation) 
 
