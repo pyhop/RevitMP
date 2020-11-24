@@ -1,6 +1,6 @@
 """Opens model without Revit interface
 """
-__title__ = 'Ope'
+__title__ = 'Background Document'
 __author__= 'marentette'
 
 from Autodesk.Revit.DB import OpenOptions,\
