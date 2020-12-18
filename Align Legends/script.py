@@ -22,7 +22,7 @@ from pyrevit import forms
 from june import revit_transaction   
 
 uidoc = __revit__.ActiveUIDocument
-doc = __revit__.ActiveUIDocument.Document
+doc = uidoc.Document
 
     
 def selected_legend():
