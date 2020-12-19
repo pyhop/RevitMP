@@ -42,6 +42,7 @@ def selected_terminals():
 
 @revit_transaction('Tag Terminals')
 def tag_terminals(air_terminals):
+    """Tag Terminals"""
     terminal_tags = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_DuctTerminalTags).WhereElementIsNotElementType().ToElements()
     for a in air_terminals:
         Create(doc,
@@ -51,8 +52,7 @@ def tag_terminals(air_terminals):
                True,
                TagOrientation.Horizontal,
                a.Location.Point)
-               
-    
+                   
 if __name__ == '__main__':
     tag_terminals(selected_terminals()) 
     
