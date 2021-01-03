@@ -15,7 +15,7 @@ import sys
 from Autodesk.Revit.DB import \
 FilteredElementCollector,BuiltInCategory
 
-import Autodesk
+from Autodesk.Revit.UI.Selection import ObjectType
 
 from pyrevit import forms
 
@@ -28,7 +28,7 @@ doc = uidoc.Document
 def selected_legend():
     """Get Box Outline Point of User Selected Legend"""
     with forms.WarningBar(title='Select Legend on Sheet'):
-        selected_element = doc.GetElement(uidoc.Selection.PickObject(Autodesk.Revit.UI.Selection.ObjectType.Element))
+        selected_element = doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element))
     select_legend = -1
     try:
         if doc.GetElement(selected_element.ViewId).ViewType.ToString() == 'Legend':
