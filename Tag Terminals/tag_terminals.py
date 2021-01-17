@@ -4,9 +4,12 @@ all the air terminals
 __title__ = 'Tag\nTerminals'
 __author__= 'marentette'
 
-from Autodesk.Revit.DB import \
-FilteredElementCollector,BuiltInCategory,\
-Reference,TagOrientation
+from Autodesk.Revit.DB import(
+FilteredElementCollector,      
+BuiltInCategory,
+Reference,
+TagOrientation
+)
 
 from Autodesk.Revit.DB.IndependentTag import Create
 
@@ -26,8 +29,9 @@ def selected_terminals():
     """Grab User Selections and Exit if No Air Terminals were Selected"""
     selected_elements = uidoc.Selection.GetElementIds()    
     if len(selected_elements) > 0: pass
-    else: 
-        exit_('No Elements were Selected') 
+    
+    else: exit_('No Elements were Selected')
+    
     air_terminals = [] 
     for e in selected_elements: 
         el = doc.GetElement(e)
