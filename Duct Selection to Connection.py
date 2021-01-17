@@ -2,14 +2,18 @@
 Compares ducts area to connect the selected ducts all 
 to the largest duct selected. Matches the elevation of the
 largest duct to the smaller ducts before connecting and changes 
-the connecting ducts types if connecting ducts are tee type
+the connecting ducts type if connecting ducts are tee type
 """
 __title__ = 'Duct Selection to Connection' 
 __author__= 'marentette'
 
-from Autodesk.Revit.DB import \
-BuiltInParameter,XYZ,ElementTransformUtils,\
-FilteredElementCollector,BuiltInCategory
+from Autodesk.Revit.DB import(
+BuiltInParameter,
+XYZ,
+ElementTransformUtils,
+FilteredElementCollector,
+BuiltInCategory
+)
 
 from june import revit_transaction
 
@@ -64,6 +68,7 @@ def change_duct_type(duct,shape):
             type_change = [i for i in duct_types if i.get_Parameter(BuiltInParameter.SYMBOL_NAME_PARAM).AsString() == 'Taps'][0] 
         else: 
             type_change = [i for i in duct_types if i.get_Parameter(BuiltInParameter.SYMBOL_NAME_PARAM).AsString() == 'Mitered Elbows / Taps'][0]
+        
         return duct.ChangeTypeId(type_change.Id)
     
 @revit_transaction('Selection to Connection')
@@ -84,4 +89,3 @@ def main(ducts):
          
 if __name__ =='__main__':
     main(sort_ducts(selected_ducts()))   
-
