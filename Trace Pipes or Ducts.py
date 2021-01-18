@@ -3,44 +3,54 @@
 __title__ = 'Trace Pipes or Ducts' 
 __author__= 'marentette'
 
-from Autodesk.Revit.DB import \
-Element,GraphicsStyleType,\
-BuiltInParameter,XYZ, \
-Line, BuiltInCategory  
-
-from Autodesk.Revit.UI import TaskDialog, TaskDialogCommonButtons
-
+from Autodesk.Revit.DB import(
+Element,
+GraphicsStyleType,
+BuiltInParameter,
+XYZ, 
+Line, 
+BuiltInCategory  
+)
 from Autodesk.Revit.DB.Plumbing import Pipe  
 from Autodesk.Revit.DB.Mechanical import Duct 
 
 from june import revit_transaction 
 
-doc = __revit__.ActiveUIDocument.Document
 uidoc = __revit__.ActiveUIDocument
-view = doc.ActiveView
+doc = uidoc.Document
 
+def exit_(reason): 
+    """Exit Function"""
+    import sys
+    from pyrevit import forms
+    forms.alert(reason)
+    return sys.exit() 
+    
 @revit_transaction('Trace')
-def trace_elements(elements,factor):
+def trace_elements(elements,factor,view):
+    """Trace Selected Elements"""
     for e in elements: 
-        BB_Box(e,view).Trace(factor)
+        BB_Box(e,view).Trace(factor,line_style('Dashed'))
 
-"""Get Selected Elements"""
-selection_ids = uidoc.Selection.GetElementIds()
-get_elements = [doc.GetElement(e) for e in selection_ids]
-"""Filter for Ducts and Pipes Only"""
-elements = [e for e in get_elements if isinstance(e, Pipe) or isinstance(e, Duct)]
+def selected():
+    """Get Selected Elements"""
+    selection_ids = uidoc.Selection.GetElementIds()
+    get_elements = [doc.GetElement(e) for e in selection_ids]
+    elements = [e for e in get_elements if isinstance(e, Pipe) or isinstance(e, Duct)]
+    return elements if elements else exit_('Select elements before running') 
 
-if not elements: 
-    dialog = TaskDialog('Error')
-    dialog.MainInstruction= 'Select Elements Before Starting'
-    dialog.Show() 
+def line_style(style = str):
+    """Line Style"""
+    line= doc.Settings.Categories.get_Item(BuiltInCategory.OST_Lines)
+    return line.SubCategories.get_Item(style).GetGraphicsStyle(GraphicsStyleType.Projection)
+
 
 class BB_Box:
     def __init__(self,element,view):
         self.element = element 
         self.view = view 
 
-    def Trace(self,factor):
+    def Trace(self,factor,line_style):
         BB= self.element.get_BoundingBox(self.view)
         """Expand Boundry Box by Factor"""
         pt1X = (BB.Min[0] - factor) if BB.Min[1] > 0 else (BB.Min[0] - factor)
@@ -62,15 +72,7 @@ class BB_Box:
         lines = [] 
         for i,j in zip(start,end):
             L = Line.CreateBound(i,j)
-            doc.Create.NewDetailCurve(self.view, L).LineStyle= linestyle
+            doc.Create.NewDetailCurve(self.view, L).LineStyle= line_style
 
-"""Enter Desired Line Type Name"""
-style = 'Dashed'
-line= doc.Settings.Categories.get_Item(BuiltInCategory.OST_Lines)
-linestyle =line.SubCategories.get_Item(style).GetGraphicsStyle(GraphicsStyleType.Projection)
-
-"""Enter Size Factor to Extend Around Element"""
-factor = 0.5    
-
-trace_elements(elements,factor)
-
+if __name__ == '__main__':
+    trace_elements(selected(),0.5,doc.ActiveView)
