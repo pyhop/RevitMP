@@ -9,6 +9,7 @@ FilteredElementCollector,
 View,
 Level,
 ViewPlan,
+ViewType,
 ElementTypeGroup 
 )
 from rpw import revit,db 
@@ -17,8 +18,9 @@ from gui import flex_form,select_levels
 doc = revit.doc
 
 #Collect View Templates
-views = FilteredElementCollector(doc).OfClass(View).ToElements() 
-templates_dict =dict(zip([i.Name for i in views if i.IsTemplate],[i for i in views if i.IsTemplate])) 
+views = list(FilteredElementCollector(doc).OfClass(View).ToElements()) 
+view_templates = [v for v in views if v.ViewType==ViewType.FloorPlan and v.IsTemplate]
+template_dict =dict(zip([i.Name for i in view_templates],view_templates)) 
 
 #Collect Levels
 levels = FilteredElementCollector(doc).OfClass(Level).ToElements() 
@@ -27,7 +29,7 @@ levels = FilteredElementCollector(doc).OfClass(Level).ToElements()
 view_type = doc.GetDefaultElementTypeId(ElementTypeGroup.ViewTypeFloorPlan)
 
 #Launch main window 
-user_input = flex_form(templates_dict,'Enter Suffix Here').values 
+user_input = flex_form(template_dict,'Enter Suffix Here').values 
 
 if user_input['select_levels']:
     levels = select_levels(doc,levels)
@@ -44,9 +46,3 @@ with db.Transaction(doc=doc, name="Create Views"):
         new_view.ViewTemplateId = user_input['template'].Id
         print(new_view.Name)
     print('Template --> {}'.format(user_input['template'].Name))
-
-
-    
-
-
-
