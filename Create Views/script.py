@@ -18,10 +18,8 @@ from gui import flex_form,select_levels
 doc = revit.doc
 
 #Collect View Templates
-views = list(FilteredElementCollector(doc).OfClass(View).ToElements()) 
-view_templates = [v for v in views if v.ViewType==ViewType.FloorPlan and v.IsTemplate]
-template_dict =dict(zip([i.Name for i in view_templates],view_templates)) 
-
+views = FilteredElementCollector(doc).OfClass(View).ToElements()
+template_dict = {v.Name:v for v in views if v.ViewType==ViewType.FloorPlan and v.IsTemplate}
 #Collect Levels
 levels = FilteredElementCollector(doc).OfClass(Level).ToElements() 
 
