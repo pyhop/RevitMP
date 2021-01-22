@@ -33,7 +33,7 @@ def flex_form(combo_values = dict, default_text = str):
 
 def select_levels(doc,levels):
     """Select Levels"""
-    level_dict = dict(zip([i.Name for i in levels],[i for i in levels]))  
+    level_dict = {level.Name:level for level in levels}  
     selected_levels = forms.SelectFromList.show([i.Name for i in levels], 
                                           title= "Select Levels",
                                           width=300, 
