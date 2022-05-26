@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="20.09.21" ProductCode="b57c480f-24f5-44bf-800c-7df8ddd70305">
+  <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2018" SeriesMax="R2021" />
+  <Components Description="2018">
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2018" SeriesMax="R2018" />
+    <ComponentEntry AppName="pyhop" ModuleName="./Contents/2018/pyhop.addin"></ComponentEntry>
+  </Components>
+  <Components Description="2019">
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2019" SeriesMax="R2019" />
+    <ComponentEntry AppName="pyhop" ModuleName="./Contents/2019/pyhop.addin"></ComponentEntry>
+  </Components>
+  <Components Description="2020">
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2020" SeriesMax="R2020" />
+    <ComponentEntry AppName="pyhop" ModuleName="./Contents/2020/pyhop.addin"></ComponentEntry>
+  </Components>
+  <Components Description="2021">
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2021" SeriesMax="R2021" />
+    <ComponentEntry AppName="pyhop" ModuleName="./Contents/2021/pyhop.addin"></ComponentEntry>
+  </Components>
+  <Components Description="2022">
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2022" SeriesMax="R2022" />
+    <ComponentEntry AppName="pyhop" ModuleName="./Contents/2022/pyhop.addin"></ComponentEntry>
+  </Components>
+  <Components Description="2023">
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2023" SeriesMax="R2023" />
+    <ComponentEntry AppName="pyhop" ModuleName="./Contents/2023/pyhop.addin"></ComponentEntry>
+  </Components>
+</ApplicationPackage>
